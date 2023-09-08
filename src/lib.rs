@@ -78,8 +78,8 @@ impl Universe {
     }
 
     pub fn new() -> Universe {
-        let width = 64;
-        let height = 64;
+        let width = 128;
+        let height = 128;
 
         let cells = (0..width * height)
             .map(|i| {
@@ -100,6 +100,18 @@ impl Universe {
 
     pub fn render(&self) -> String {
         self.to_string()
+    }
+
+    pub fn width(&self) -> u32 {
+        self.width
+    }
+
+    pub fn height(&self) -> u32 {
+        self.height
+    }
+
+    pub fn cells(&self) -> *const Cell {
+        self.cells.as_ptr()
     }
 
 }
@@ -142,8 +154,8 @@ mod tests {
             height: 5,
             cells: vec![Cell::Dead; 25],
         };
-        for i in 1..6 {
-            for j in 1..6 {
+        for i in 0..5 {
+            for j in 0..5 {
                 assert_eq!(universe.live_neighbor_count(i, j), 0);
             }
         }
